@@ -36,4 +36,22 @@ Following that , I've finished my implementation in FusionEKF.cpp with:
 * Predict F and Q matrices when new measurements arrive
 * Update EKF using received sensor data (either LIDAR or Radar)
 
-The outputs for estimation is in [output.txt](https://github.com/BernhardRode/CarND-Extended-Kalman-Filter-Project/blob/master/outputs/output.txt) file.
+The outputs for estimations of dataset 1 is in [output.txt](https://github.com/BernhardRode/CarND-Extended-Kalman-Filter-Project/blob/master/outputs/output.txt) file.
+
+We got a result of RMSE:
+X: 0.0726
+Y: 0.0967
+VX: 0.4579
+VY: 0.4966
+
+![Dataset 1](https://github.com/BernhardRode/CarND-Extended-Kalman-Filter-Project/blob/master/outputs/screenshot.png)
+
+The outputs for estimations of dataset 2 is in [outputs.dataset2.txt](https://github.com/BernhardRode/CarND-Extended-Kalman-Filter-Project/blob/master/outputs/outputs.dataset2.txt) file.
+
+We got a result of RMSE:
+X: 0.0973
+Y: 0.0855
+VX: 0.4513
+VY: 0.4399
+
+![Dataset 2](https://github.com/BernhardRode/CarND-Extended-Kalman-Filter-Project/blob/master/outputs/screenshot.dataset2.png)
