@@ -44,8 +44,35 @@ void KalmanFilter::Update(const VectorXd &z)
 
 void KalmanFilter::UpdateEKF(const VectorXd &z)
 {
-  /**
-  TODO:
-    * update the state by using Extended Kalman Filter equations
-  */
+  // update the state by using Extended Kalman Filter equations
+
+  // Predicted State
+  float px = x_(0);
+  float py = x_(1);
+  float vx = x_(2);
+  float vy = x_(3);
+
+  // Radar Measurement Space
+  float rho = sqrt(px * px + py * py);
+  float phi = atan2(py, px);
+  float rho_dot = (rho != 0 ? (px * vx + py * vy) / rho : 0);
+
+  // Define predicted vector (position and speed)
+  VectorXd z_pred(3);
+  z_pred << rho, phi, rho_dot;
+
+  //normalize the angle
+  VectorXd y2 = z - z_pred;
+  y2[1] = atan2(sin(y2[1]), cos(y2[1]));
+
+  MatrixXd Ht = H_.transpose();
+  MatrixXd S = H_ * P_ * Ht + R_;
+  MatrixXd Si = S.inverse();
+  MatrixXd K = P_ * Ht * Si;
+
+  //new state
+  x_ = x_ + (K * y2);
+  long x_size = x_.size();
+  MatrixXd I = MatrixXd::Identity(x_size, x_size);
+  P_ = (I - K * H_) * P_;
 }
